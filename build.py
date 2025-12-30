@@ -2,54 +2,50 @@ import os
 import shutil
 from flask_frozen import Freezer
 
-# 嘗試匯入 app，避免找不到檔案
-try:
-    from app import app
-except ImportError:
-    # 如果你的主程式叫 main.py，請自己改這裡
-    try:
-        from main import app
-    except:
-        print("❌ 找不到 app.py 或 main.py，請確認你的主程式檔名！")
-        exit()
+# 1. 【關鍵修正】正確匯入 app (前面不可以有空格！)
+from cmsimde.flaskapp import app
 
-# 設定：讓路徑變成相對路徑 (重要！這樣 GitHub Pages 才能讀到 css/js/圖片)
+# 2. 設定
 app.config['FREEZER_RELATIVE_URLS'] = True
 app.config['FREEZER_DESTINATION'] = 'docs'
 
-print("🚀 開始建置靜態網站...")
+print("🚀 開始建置靜態網站 (CMS版)...")
 
-# 1. 清除舊的 docs 資料夾
+# 3. 清除舊資料
 if os.path.exists('docs'):
     shutil.rmtree('docs')
-    print("🧹 清除舊資料完成")
+    print("🧹 舊資料清理完畢")
 
-# 2. 啟動冷凍庫 (轉成靜態 HTML)
+# 4. 開始轉檔
 freezer = Freezer(app)
 
-# --- 這裡加入一個設定，讓它能抓到所有連結 ---
-# 如果你的網頁有動態連結 (例如 /get_page/...)，
-# 只要首頁有點擊得到的連結，Freezer 通常都抓得到。
 try:
     freezer.freeze()
-    print("❄️ HTML 轉檔完成")
+    print("❄️  HTML 轉檔完成")
 except Exception as e:
-    print(f"⚠️ 轉檔過程警告 (通常沒關係): {e}")
+    print(f"⚠️ 轉檔過程警告: {e}")
 
-# 3. 【強制搬運】把 static 資料夾 (圖片/影片/CSS) 完整複製過去
-# 這是為了保證你的圖片絕對不會消失
-source_static = 'static'
-dest_static = 'docs/static'
+# 5. 【加強版搬運】嘗試搬運 cmsimde 裡的 static 資源
+# 因為你的系統比較複雜，圖片可能藏在不同地方，我們都試著搬搬看
+static_locations = ['static', 'cmsimde/static', 'content']
 
-if os.path.exists(source_static):
-    # 如果 static 已經被 freezer 複製了一部分，先刪掉避免衝突
-    if os.path.exists(dest_static):
-        shutil.rmtree(dest_static)
-    
-    shutil.copytree(source_static, dest_static)
-    print(f"📦 靜態檔案 (圖片/影片) 已強制複製到 {dest_static}")
-else:
-    print("❌ 警告：找不到你的 static 資料夾！")
+for location in static_locations:
+    if os.path.exists(location):
+        # 目標路徑
+        dest = f'docs/{location}'
+        
+        # 如果是 static 資料夾，我們把它合併到 docs/static
+        if location == 'static' or location == 'cmsimde/static':
+            dest = 'docs/static'
+        
+        # 執行複製
+        try:
+            # 如果目標不存在才複製，避免覆蓋
+            if not os.path.exists(dest):
+                shutil.copytree(location, dest)
+                print(f"📦 已備份資源: {location} -> {dest}")
+        except Exception as e:
+            pass # 忽略重複複製的錯誤
 
 print("-" * 30)
-print("✅ 建置完成！請輸入 git push 上傳到 GitHub。")
+print("✅ 建置完成！請輸入 git add . && git commit -m 'CMS轉檔' && git push")
