@@ -2,6 +2,7 @@
         <head>
         <title>cmsimde_site</title>
         <meta charset="utf-8">
+<meta property="head" content="H1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/css/bootstrap.min.css">
@@ -141,15 +142,19 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content"> <a href='(一) 前端、後端、 Flask料庫:.html'>Next</a> >> (一) 前端、後端、 Flask料庫:<br /><h1>第七組的分組期末報告</h1>
-<p style="text-align: center;"><br/><span style="text-decoration: underline;"><img alt="" height="157" src="./../images/4555.png.png" width="280"/></span></p>
-<p style="text-align: center;"><span style="text-decoration: underline;">這是我們遊戲的主程式</span></p>
-<p style="text-align: center;"><strong><span style="text-decoration: underline;"><img alt="" height="172" src="./../images/123.png.png" style="display: block; margin-left: auto; margin-right: auto;" width="321"/>1.第一步先下載python</span></strong></p>
-<p style="text-align: center;"><strong><span style="text-decoration: underline;"><img alt="" height="164" src="./../images/1233.png.png" style="display: block; margin-left: auto; margin-right: auto;" width="309"/>2.選自己電腦的作業系統</span></strong></p>
-<p style="text-align: center;"><strong><span style="text-decoration: underline;"><img alt="" height="27" src="./../images/45614.png.png" style="display: block; margin-left: auto; margin-right: auto;" width="322"/>3.下載64位元的</span></strong></p>
-<p style="text-align: center;"><strong><span style="text-decoration: underline;"><img alt="" height="165" src="./../images/88888.png.png" style="display: block; margin-left: auto; margin-right: auto;" width="137"/>4.第二部下載這個東西完成遊戲的前置作業</span></strong></p>
-<p><strong></strong></p>
-<br /> <a href='(一) 前端、後端、 Flask料庫:.html'>Next</a> >> (一) 前端、後端、 Flask料庫:</div>
+    <div id="tipue_search_content">(五) 機器人程式: << <a href='(五) 機器人程式:.html'>Previous</a> <a href='(七) 機器人程式:.html'>Next</a> >> (七) 機器人程式:<br /><h1>(六) 機器人程式:</h1>
+<p><span>請修改 </span><a href="https://mde.tw/cp2025/content/Brython.html?src=https://gist.githubusercontent.com/mdecycu/58fed8bd2f5be98a6456a8dcae512011/raw/4019adba4ee4be19c35982d835bad8e7d83a7b2f/brython_robot4_ex1.py">brython_robot4_ex1.py</a><span><span> </span>程式，讓機器人可以與</span><a href="https://mde.tw/cp2025/reeborg/?lang=en&amp;mode=python&amp;menu=worlds%2Fmenus%2Fselect_collection_en.json&amp;name=Alone&amp;url=worlds%2Ftutorial_en%2Fharvest1.json&amp;editor=python%2Fharvest1_east_west.py">機器人收割程式</a><span>的水平採收方式相同。</span></p>
+<p>@@ -0,0 +1,80 @@<br/>from brython_robot4 import init, load_scene_from_url, get_url_parameter<br/>from browser import aio</p>
+<p># 機器人行為腳本<br/>async def robot_actions(robot):<br/> print("開始執行機器人程式，採水平 (Z字形) 巡邏方式採收胡蘿蔔。")</p>
+<p>async def collect_carrots():<br/> # 在當前格子採收所有胡蘿蔔 (假設 'pale_grass' 表示有胡蘿蔔)<br/> while robot.background_is("pale_grass"):<br/> await robot.pick_carrot()</p>
+<p>async def turn_right():<br/> # 透過三次左轉實現右轉<br/> await robot.turn_left()<br/> await robot.turn_left()<br/> await robot.turn_left()</p>
+<p># ----------------------------------------------------<br/> # 主巡邏迴圈：水平 (Z字形) 採收邏輯<br/> is_moving_east = True # 設定初始方向：第一行向東 (E) 走<br/> <br/> # 迴圈直到無法再向上移動 (即到達世界頂端)<br/> while True:<br/> # A. 採收當前格子 (起始點)<br/> await collect_carrots()<br/> <br/> # B. 沿當前方向移動到底<br/> # 持續向前移動，直到前方遇到障礙 (牆壁或世界邊界)<br/> while robot.front_is_clear():<br/> await robot.move(1)<br/> await collect_carrots()<br/> <br/> # C. 檢查是否完成巡邏 (無法向上移動)<br/> # 轉向北 (N) 準備檢查並移動到下一行<br/> if is_moving_east:<br/> await robot.turn_left() # E -&gt; N<br/> else:<br/> await turn_right() # W -&gt; N<br/> <br/> # 檢查上方是否暢通。如果前方是牆壁，表示到達頂部，巡邏完成。<br/> if not robot.front_is_clear():<br/> break # 巡邏完成<br/> <br/> # D. 向上移動一步<br/> await robot.move(1)<br/> await collect_carrots()</p>
+<p># E. 準備下一個方向 (調整為 W 或 E)<br/> if is_moving_east:<br/> # 剛才向東走 (E)，現在在北邊 (N)，準備往西走 (W)<br/> await robot.turn_left() # N -&gt; W<br/> is_moving_east = False<br/> else:<br/> # 剛才向西走 (W)，現在在北邊 (N)，準備往東走 (E)<br/> await turn_right() # N -&gt; E<br/> is_moving_east = True</p>
+<p># ----------------------------------------------------<br/> <br/> # 所有的動作都結束後<br/> print("所有可達格子都已探索完畢。")<br/> print(f"程式執行完畢。總共採收了 {robot.carrots_collected} 個胡蘿蔔。")</p>
+<p># 程式啟動點<br/>async def main():<br/> world_url = get_url_parameter('world')<br/> if world_url:<br/> scene_data = await load_scene_from_url(world_url)<br/> # 設定機器人容量上限為 50<br/> world, robot = init(scene_data, robot_config={"max_carrots": 50})<br/> else:<br/> # 預設場景也設定容量上限<br/> world, robot = init(robot_config={"max_carrots": 50})</p>
+<p>if robot:<br/> await robot_actions(robot)</p>
+<p># 啟動主程式<br/>aio.run(main())</p>
+<br />(五) 機器人程式: << <a href='(五) 機器人程式:.html'>Previous</a> <a href='(七) 機器人程式:.html'>Next</a> >> (七) 機器人程式:</div>
         
     <!-- footer -->
       <div class="container">

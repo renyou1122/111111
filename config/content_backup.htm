@@ -46,5 +46,301 @@
 <p style="text-align: center;"><span style="color: #000000;">2.運行 ngrok 命令：<span style="color: #ff0000;"><span> </span>ngrok http 6000</span></span></p>
 <p style="text-align: center;"><span style="color: #000000;">3. 在瀏覽器輸入 【<span> </span><span style="color: #ff0000;">https://marry-slithery-simon.ngrok-free.dev</span><span> </span>】</span></p>
 <p style="text-align: center;"><span style="color: #000000;">操作完結果 ( 影片 ) : 【<a href="/get_page/(%E4%B8%89)%20Ngrok%20%E5%95%9F%E5%8B%95%E6%AD%A5%E9%A9%9F:/%20https:/youtu.be/8XxtHK9a7Y0"><span> </span><span style="color: #ff0000;">https://youtu.be/8XxtHK9a7Y0</span></a><span> </span>】</span></p>
-<p><span style="color: #000000;"></span></p>
-<p></p>
+<p style="text-align: center;"><strong><span style="color: #000000;"></span></strong></p>
+<p style="text-align: center;"><span style="color: #000000;"><span>操作完結果 ( 影片 ) : 【<a href="https://youtu.be/xpXTno3o3yI">https://youtu.be/xpXTno3o3yI</a></span><span> </span><span>】</span></span></p>
+<p style="text-align: center;"><span style="color: #000000;"><span></span></span></p>
+<h1>(一) 機器人程式:</h1>
+<p><br/><br/><a href="https://mde.tw/cp2025/reeborg/?lang=en&amp;mode=python&amp;menu=worlds%2Fmenus%2Fselect_collection_en.json&amp;name=Alone&amp;url=worlds%2Ftutorial_en%2Faround1.json"></a></p>
+<p><br/>1.<a href="https://mde.tw/cp2025/reeborg/?lang=en&amp;mode=python&amp;menu=worlds%2Fmenus%2Fselect_collection_en.json&amp;name=Alone&amp;url=worlds%2Ftutorial_en%2Faround1.json">around1</a></p>
+<p>def turn_right():<br/> turn_left()<br/> turn_left()<br/> turn_left()</p>
+<p>def move_n_steps(n):<br/> for _ in range(n):<br/> if front_is_clear():<br/> move()<br/> else:<br/> break</p>
+<p>for _ in range(4):<br/> move_n_steps(9) # 因為起點已在第一格，走9步等於跨10格<br/> turn_left()</p>
+<p><br/><br/><a href="https://mde.tw/cp2025/reeborg/?lang=en&amp;mode=python&amp;menu=worlds%2Fmenus%2Fselect_collection_en.json&amp;name=Alone&amp;url=worlds%2Ftutorial_en%2Faround2.json"></a></p>
+<p><br/>2.<a href="https://mde.tw/cp2025/reeborg/?lang=en&amp;mode=python&amp;menu=worlds%2Fmenus%2Fselect_collection_en.json&amp;name=Alone&amp;url=worlds%2Ftutorial_en%2Faround2.json">around2</a></p>
+<p>def turn_right():</p>
+<p>turn_left()<br/> turn_left()<br/> turn_left()</p>
+<p># 走 n 步<br/>def move_n(n):<br/> for _ in range(n):<br/> move()</p>
+<p># 起點 (1,4) 朝東</p>
+<p># 1. 向東走6格<br/>move_n(6)</p>
+<p># 2. 向北走4格<br/>turn_left() # 朝北<br/>move_n(4)</p>
+<p># 3. 向西走5格<br/>turn_left() # 朝西<br/>move_n(5)</p>
+<p># 4. 向北走5格<br/>turn_right() # 朝北<br/>move_n(5)</p>
+<p># 5. 向西走4格<br/>turn_left() # 朝西<br/>move_n(4)</p>
+<p># 6. 向南走9格<br/>turn_left() # 朝南<br/>move_n(9)</p>
+<p># 7. 向東走3格，回到起點<br/>turn_left() # 朝東<br/>move_n(3)</p>
+<h1>(二) 機器人程式:</h1>
+<p><a href="https://mde.tw/cp2025/reeborg/?lang=en&amp;mode=python&amp;menu=worlds%2Fmenus%2Fselect_collection_en.json&amp;name=Alone&amp;url=worlds%2Ftutorial_en%2Faround3.json">around3</a></p>
+<p># 輔助函數：定義 turn_right()<br/>def turn_right():<br/>turn_left()<br/>turn_left()<br/>turn_left()</p>
+<p># 輔助函數：走 n 步 (消除 NameError: 確保使用 move())<br/>def move_n(n):<br/>for _ in range(n):<br/>move()</p>
+<p># --- 主程式：順時針繞行，避開 (5, 1) 磚牆 ---<br/># 機器人起點：(4, 1) 朝東。</p>
+<p># --- 階段 1: 避開 (5, 1) 磚牆 ---</p>
+<p># 1. 轉向北 (準備向上繞行)<br/>turn_left()<br/># 2. 向北走 1 步 (到 4, 2)<br/>move_n(1)</p>
+<p># 3. 轉向東<br/>turn_right()<br/># 4. 向東走 2 步 (跨過 x=5 障礙，到達 6, 2)<br/>move_n(2)</p>
+<p># 5. 轉向南<br/>turn_right()<br/># 6. 向南走 1 步 (回到 6, 1)<br/>move_n(1)</p>
+<p># 機器人現在在 (6, 1)，面朝南。</p>
+<p># --- 階段 2: 進入順時針主路線 ---</p>
+<p># 7. 轉向東 (讓機器人轉向順時針主方向)<br/>turn_left()</p>
+<p># 8. 向東走 4 步 (從 x=6 到 x=10)<br/>move_n(4)<br/>turn_left()</p>
+<p># 9. 向北走 3 步 (到 10, 4)<br/>move_n(4)<br/>turn_left()</p>
+<p># 10. 向西走 4 步 (到 6, 4)<br/>move_n(5)<br/>turn_right()</p>
+<p># 11. 向北走 6 步 (到 6, 10)<br/>move_n(5)<br/>turn_left()</p>
+<p># 12. 向西走 5 步 (到 1, 10)<br/>move_n(4)<br/>turn_left()</p>
+<p># 13. 向南走 9 步 (到 1, 1)<br/>move_n(9)<br/>turn_left()</p>
+<p># 14. 向東走 3 步 (回到 x=4)<br/>move_n(3)</p>
+<h1>(三) 機器人程式:</h1>
+<p><span> </span><a href="https://mde.tw/cp2025/reeborg/?lang=en&amp;mode=python&amp;menu=worlds%2Fmenus%2Fselect_collection_en.json&amp;name=Alone&amp;url=worlds%2Ftutorial_en%2Faround4.json">around4</a></p>
+<p># 輔助函數：定義 turn_right()<br/>def turn_right():<br/> turn_left()<br/> turn_left()<br/> turn_left()</p>
+<p># 輔助函數：走 n 步 (消除 NameError: 確保使用 move())<br/>def move_n(n):<br/> for _ in range(n):<br/> move()</p>
+<p>turn_left()<br/>turn_left()<br/>move_n(1)<br/>turn_right()<br/>move_n(2)<br/>turn_right()<br/>move_n(3)<br/>turn_right()<br/>move_n(2)<br/>turn_left()<br/>move_n(4)<br/>turn_left()<br/>move_n(4)<br/>turn_left()<br/>move_n(5)<br/>turn_right()<br/>move_n(5)<br/>turn_left()<br/>move_n(4)<br/>turn_left()<br/>move_n(9)<br/>turn_left()<br/>move_n(3)</p>
+<h1>(四) 機器人程式:</h1>
+<p><span>請修改 </span><a href="https://mde.tw/cp2025/content/Brython.html?src=https://gist.githubusercontent.com/mdecycu/ec4bb35dd0769e7a83d2a9fa57878a67/raw/b33c5fc2a0774f8c5d2b0e8c7c7908e58d73bb94/robot_1.py">Brython_robot</a><span><span> </span>程式，讓機器人可以採水平巡邏方式，走過每一個區域。</span></p>
+<p>@@ -0,0 +1,248 @@<br/>from browser import document, html, timer</p>
+<p># --- Constants ---<br/>CELL_SIZE = 40<br/>WALL_THICKNESS = 6<br/>IMG_PATH = "https://mde.tw/cp2025/reeborg/src/images/"<br/>ANIMATION_DELAY_MS = 150 # 調整動畫速度</p>
+<p># --- World Class: Handles the visual grid and walls ---<br/>class World:<br/> def __init__(self, width, height):<br/> self.width = width<br/> self.height = height<br/> self.layers = self._create_layers()<br/> self._init_html()<br/> self._draw_grid()<br/> self._draw_walls()</p>
+<p>def _create_layers(self):<br/> # 創建四個 Canvas 圖層，Z-index 越高越在上層<br/> return {<br/> "grid": html.CANVAS(width=self.width * CELL_SIZE, height=self.height * CELL_SIZE),<br/> "walls": html.CANVAS(width=self.width * CELL_SIZE, height=self.height * CELL_SIZE),<br/> "objects": html.CANVAS(width=self.width * CELL_SIZE, height=self.height * CELL_SIZE), # 用於繪製移動軌跡 (trace)<br/> "robots": html.CANVAS(width=self.width * CELL_SIZE, height=self.height * CELL_SIZE), # 用於繪製機器人<br/> }</p>
+<p>def _init_html(self):<br/> # 初始化 HTML 容器並將 Canvas 疊加起來<br/> container = html.DIV(style={<br/> "position": "relative",<br/> "width": f"{self.width * CELL_SIZE}px",<br/> "height": f"{self.height * CELL_SIZE}px",<br/> "border": "2px solid #333",<br/> "boxShadow": "0 4px 10px rgba(0,0,0,0.1)"<br/> })<br/> for z, canvas in enumerate(self.layers.values()):<br/> canvas.style = {<br/> "position": "absolute",<br/> "top": "0px",<br/> "left": "0px",<br/> "zIndex": str(z)<br/> }<br/> container &lt;= canvas<br/> document["brython_div1"].clear()<br/> document["brython_div1"] &lt;= container</p>
+<p>def _draw_grid(self):<br/> # 繪製灰色網格線<br/> ctx = self.layers["grid"].getContext("2d")<br/> ctx.strokeStyle = "#cccccc"<br/> for i in range(self.width + 1):<br/> ctx.beginPath()<br/> ctx.moveTo(i * CELL_SIZE, 0)<br/> ctx.lineTo(i * CELL_SIZE, self.height * CELL_SIZE)<br/> ctx.stroke()<br/> for j in range(self.height + 1):<br/> ctx.beginPath()<br/> ctx.moveTo(0, j * CELL_SIZE)<br/> ctx.lineTo(self.width * CELL_SIZE, j * CELL_SIZE)<br/> ctx.stroke()</p>
+<p>def _draw_image(self, ctx, src, x, y, w, h, offset_x=0, offset_y=0):<br/> # 繪製圖片的輔助函數，處理圖片載入和座標轉換<br/> # Reeborg 座標 (x, y) 轉 Canvas 像素 (px, py)<br/> img = html.IMG()<br/> img.src = src<br/> def onload(evt):<br/> px = x * CELL_SIZE + offset_x<br/> # 轉換 Y 軸：Reeborg (1,1) 是左下角，Canvas (0,0) 是左上角<br/> py = (self.height - 1 - y) * CELL_SIZE + offset_y<br/> ctx.drawImage(img, px, py, w, h)<br/> img.bind("load", onload)</p>
+<p>def _draw_walls(self):<br/> # 繪製世界的四週邊界牆<br/> ctx = self.layers["walls"].getContext("2d")<br/> # 北牆 (上邊界)<br/> for x in range(self.width):<br/> self._draw_image(ctx, IMG_PATH + "north.png", x, self.height - 1,<br/> CELL_SIZE, WALL_THICKNESS, offset_y=0)<br/> # 南牆 (下邊界)<br/> for x in range(self.width):<br/> self._draw_image(ctx, IMG_PATH + "north.png", x, 0,<br/> CELL_SIZE, WALL_THICKNESS, offset_y=CELL_SIZE - WALL_THICKNESS)<br/> # 西牆 (左邊界)<br/> for y in range(self.height):<br/> self._draw_image(ctx, IMG_PATH + "east.png", 0, y,<br/> WALL_THICKNESS, CELL_SIZE, offset_x=0)<br/> # 東牆 (右邊界)<br/> for y in range(self.height):<br/> self._draw_image(ctx, IMG_PATH + "east.png", self.width - 1, y,<br/> WALL_THICKNESS, CELL_SIZE, offset_x=CELL_SIZE - WALL_THICKNESS)</p>
+<p># --- AnimatedRobot Class: Handles robot state, movement queue, and drawing ---<br/>class AnimatedRobot:<br/> def __init__(self, world, x, y):<br/> self.world = world<br/> # Reeborg 座標 (1, 1) 對應內部陣列座標 (0, 0)<br/> self.x = x - 1<br/> self.y = y - 1<br/> self.facing = "E" # E, N, W, S (東, 北, 西, 南)<br/> self.facing_order = ["E", "N", "W", "S"]<br/> self.robot_ctx = world.layers["robots"].getContext("2d")<br/> self.trace_ctx = world.layers["objects"].getContext("2d")<br/> self.queue = [] # 儲存動作序列<br/> self.running = False<br/> self._draw_robot()</p>
+<p>def _robot_image(self):<br/> # 根據朝向決定圖片名稱<br/> return {<br/> "E": "blue_robot_e.png",<br/> "N": "blue_robot_n.png",<br/> "W": "blue_robot_w.png",<br/> "S": "blue_robot_s.png"<br/> }[self.facing]</p>
+<p>def _draw_robot(self):<br/> # 清除機器人圖層，並在新的位置重繪機器人<br/> self.robot_ctx.clearRect(0, 0, self.world.width * CELL_SIZE, self.world.height * CELL_SIZE)<br/> self.world._draw_image(self.robot_ctx, IMG_PATH + self._robot_image(),<br/> self.x, self.y, CELL_SIZE, CELL_SIZE)</p>
+<p>def _draw_trace(self, from_x, from_y, to_x, to_y):<br/> # 繪製移動軌跡<br/> ctx = self.trace_ctx<br/> ctx.strokeStyle = "#4CAF50" # 綠色軌跡<br/> ctx.lineWidth = 3<br/> <br/> # 將 grid 座標轉換為 Canvas 中心點像素座標<br/> fx = from_x * CELL_SIZE + CELL_SIZE / 2<br/> fy = (self.world.height - 1 - from_y) * CELL_SIZE + CELL_SIZE / 2<br/> tx = to_x * CELL_SIZE + CELL_SIZE / 2<br/> ty = (self.world.height - 1 - to_y) * CELL_SIZE + CELL_SIZE / 2<br/> <br/> ctx.beginPath()<br/> ctx.moveTo(fx, fy)<br/> ctx.lineTo(tx, ty)<br/> ctx.stroke()</p>
+<p>def move(self, steps):<br/> # 將移動動作加入佇列<br/> def action(next_done):<br/> def step():<br/> nonlocal steps<br/> if steps == 0:<br/> next_done()<br/> return</p>
+<p>from_x, from_y = self.x, self.y<br/> dx, dy = 0, 0<br/> if self.facing == "E":<br/> dx = 1<br/> elif self.facing == "W":<br/> dx = -1<br/> elif self.facing == "N":<br/> dy = 1<br/> elif self.facing == "S":<br/> dy = -1<br/> <br/> next_x = self.x + dx<br/> next_y = self.y + dy<br/> <br/> # 邊界檢查：檢查下一步是否在世界範圍內<br/> if 0 &lt;= next_x &lt; self.world.width and 0 &lt;= next_y &lt; self.world.height:<br/> self.x, self.y = next_x, next_y<br/> self._draw_trace(from_x, from_y, self.x, self.y)<br/> self._draw_robot()<br/> steps -= 1<br/> timer.set_timeout(step, ANIMATION_DELAY_MS)<br/> else:<br/> # 如果撞牆，停止移動並完成當前動作<br/> print("🚨 已經撞牆，停止移動！")<br/> next_done()<br/> step()<br/> self.queue.append(action)<br/> self._run_queue()</p>
+<p>def turn_left(self):<br/> # 左轉 (E -&gt; N -&gt; W -&gt; S -&gt; E)<br/> def action(done):<br/> idx = self.facing_order.index(self.facing)<br/> self.facing = self.facing_order[(idx + 1) % 4]<br/> self._draw_robot()<br/> timer.set_timeout(done, ANIMATION_DELAY_MS)<br/> self.queue.append(action)<br/> self._run_queue()</p>
+<p>def turn_right(self):<br/> # 右轉 (E -&gt; S -&gt; W -&gt; N -&gt; E)<br/> def action(done):<br/> idx = self.facing_order.index(self.facing)<br/> # 負數取模運算，確保結果為正<br/> self.facing = self.facing_order[(idx - 1 + 4) % 4] <br/> self._draw_robot()<br/> timer.set_timeout(done, ANIMATION_DELAY_MS)<br/> self.queue.append(action)<br/> self._run_queue()</p>
+<p>def _run_queue(self):<br/> # 處理動作佇列<br/> if self.running or not self.queue:<br/> return<br/> self.running = True<br/> action = self.queue.pop(0)<br/> action(lambda: self._done())</p>
+<p>def _done(self):<br/> # 當前動作完成，繼續執行下一個動作<br/> self.running = False<br/> self._run_queue()</p>
+<p># --- 主程式執行區塊 ---<br/># 1. 建立 10x10 的世界<br/>w = World(10, 10)<br/># 2. 在 (1, 1) 放置機器人<br/>r = AnimatedRobot(w, 1, 1)</p>
+<p># 3. 實現水平巡邏 (Z 字形) 邏輯<br/>steps_to_move = w.width - 1 # 9 步才能走完 10 格寬度</p>
+<p># 迴圈遍歷所有 10 個 Y 座標的行 (y=0 到 y=9)<br/>for i in range(w.height):<br/> is_moving_east = (i % 2 == 0) # 偶數行 (0, 2, 4...) 向東走</p>
+<p># 步驟 A: 橫向移動 (9 步)<br/> r.move(steps_to_move)</p>
+<p># 步驟 B: 轉向並垂直移動 1 步到下一行 (如果不是最後一行)<br/> if i &lt; w.height - 1:<br/> if is_moving_east:<br/> # 偶數行: 走完 (x=0-&gt;9, y=i)，面向 E。<br/> # 轉向 N (左轉)，移動 1 步 N，轉向 W (左轉)<br/> r.turn_left() # E -&gt; N<br/> r.move(1) # 移到 (x=9, y=i+1)<br/> r.turn_left() # N -&gt; W (準備往西走)<br/> else:<br/> # 奇數行: 走完 (x=9-&gt;0, y=i)，面向 W。<br/> # 轉向 N (右轉)，移動 1 步 N，轉向 E (右轉)<br/> r.turn_right() # W -&gt; N<br/> r.move(1) # 移到 (x=0, y=i+1)<br/> r.turn_right() # N -&gt; E (準備往東走)</p>
+<p># 巡邏完成後，可以讓機器人再轉向<br/>r.turn_left()<br/>r.turn_left()<br/>print("🤖 巡邏路徑繪製完成！")</p>
+<h1>(五) 機器人程式:</h1>
+<p><span>請修改 </span><a href="https://mde.tw/cp2025/content/Brython.html?src=https://gist.githubusercontent.com/mdecycu/ec4bb35dd0769e7a83d2a9fa57878a67/raw/b33c5fc2a0774f8c5d2b0e8c7c7908e58d73bb94/robot_1.py">Brython_robot</a><span><span> </span>程式，讓機器人可以採上下垂直巡邏方式，走過每一個區域。</span></p>
+<p>@@ -0,0 +1,250 @@<br/>from browser import document, html, timer</p>
+<p># --- Constants ---<br/>CELL_SIZE = 40<br/>WALL_THICKNESS = 6<br/>IMG_PATH = "https://mde.tw/cp2025/reeborg/src/images/"<br/>ANIMATION_DELAY_MS = 150 # 調整動畫速度</p>
+<p># --- World Class: Handles the visual grid and walls ---<br/>class World:<br/> def __init__(self, width, height):<br/> self.width = width<br/> self.height = height<br/> self.layers = self._create_layers()<br/> self._init_html()<br/> self._draw_grid()<br/> self._draw_walls()</p>
+<p>def _create_layers(self):<br/> # 創建四個 Canvas 圖層，Z-index 越高越在上層<br/> return {<br/> "grid": html.CANVAS(width=self.width * CELL_SIZE, height=self.height * CELL_SIZE),<br/> "walls": html.CANVAS(width=self.width * CELL_SIZE, height=self.height * CELL_SIZE),<br/> "objects": html.CANVAS(width=self.width * CELL_SIZE, height=self.height * CELL_SIZE), # 用於繪製移動軌跡 (trace)<br/> "robots": html.CANVAS(width=self.width * CELL_SIZE, height=self.height * CELL_SIZE), # 用於繪製機器人<br/> }</p>
+<p>def _init_html(self):<br/> # 初始化 HTML 容器並將 Canvas 疊加起來<br/> container = html.DIV(style={<br/> "position": "relative",<br/> "width": f"{self.width * CELL_SIZE}px",<br/> "height": f"{self.height * CELL_SIZE}px",<br/> "border": "2px solid #333",<br/> "boxShadow": "0 4px 10px rgba(0,0,0,0.1)"<br/> })<br/> for z, canvas in enumerate(self.layers.values()):<br/> canvas.style = {<br/> "position": "absolute",<br/> "top": "0px",<br/> "left": "0px",<br/> "zIndex": str(z)<br/> }<br/> container &lt;= canvas<br/> document["brython_div1"].clear()<br/> document["brython_div1"] &lt;= container</p>
+<p>def _draw_grid(self):<br/> # 繪製灰色網格線<br/> ctx = self.layers["grid"].getContext("2d")<br/> ctx.strokeStyle = "#cccccc"<br/> for i in range(self.width + 1):<br/> ctx.beginPath()<br/> ctx.moveTo(i * CELL_SIZE, 0)<br/> ctx.lineTo(i * CELL_SIZE, self.height * CELL_SIZE)<br/> ctx.stroke()<br/> for j in range(self.height + 1):<br/> ctx.beginPath()<br/> ctx.moveTo(0, j * CELL_SIZE)<br/> ctx.lineTo(self.width * CELL_SIZE, j * CELL_SIZE)<br/> ctx.stroke()</p>
+<p>def _draw_image(self, ctx, src, x, y, w, h, offset_x=0, offset_y=0):<br/> # 繪製圖片的輔助函數，處理圖片載入和座標轉換<br/> # Reeborg 座標 (x, y) 轉 Canvas 像素 (px, py)<br/> img = html.IMG()<br/> img.src = src<br/> def onload(evt):<br/> px = x * CELL_SIZE + offset_x<br/> # 轉換 Y 軸：Reeborg (1,1) 是左下角，Canvas (0,0) 是左上角<br/> py = (self.height - 1 - y) * CELL_SIZE + offset_y<br/> ctx.drawImage(img, px, py, w, h)<br/> img.bind("load", onload)</p>
+<p>def _draw_walls(self):<br/> # 繪製世界的四週邊界牆<br/> ctx = self.layers["walls"].getContext("2d")<br/> # 北牆 (上邊界)<br/> for x in range(self.width):<br/> self._draw_image(ctx, IMG_PATH + "north.png", x, self.height - 1,<br/> CELL_SIZE, WALL_THICKNESS, offset_y=0)<br/> # 南牆 (下邊界)<br/> for x in range(self.width):<br/> self._draw_image(ctx, IMG_PATH + "north.png", x, 0,<br/> CELL_SIZE, WALL_THICKNESS, offset_y=CELL_SIZE - WALL_THICKNESS)<br/> # 西牆 (左邊界)<br/> for y in range(self.height):<br/> self._draw_image(ctx, IMG_PATH + "east.png", 0, y,<br/> WALL_THICKNESS, CELL_SIZE, offset_x=0)<br/> # 東牆 (右邊界)<br/> for y in range(self.height):<br/> self._draw_image(ctx, IMG_PATH + "east.png", self.width - 1, y,<br/> WALL_THICKNESS, CELL_SIZE, offset_x=CELL_SIZE - WALL_THICKNESS)</p>
+<p># --- AnimatedRobot Class: Handles robot state, movement queue, and drawing ---<br/>class AnimatedRobot:<br/> def __init__(self, world, x, y):<br/> self.world = world<br/> # Reeborg 座標 (1, 1) 對應內部陣列座標 (0, 0)<br/> self.x = x - 1<br/> self.y = y - 1<br/> self.facing = "E" # E, N, W, S (東, 北, 西, 南)<br/> self.facing_order = ["E", "N", "W", "S"]<br/> self.robot_ctx = world.layers["robots"].getContext("2d")<br/> self.trace_ctx = world.layers["objects"].getContext("2d")<br/> self.queue = [] # 儲存動作序列<br/> self.running = False<br/> self._draw_robot()</p>
+<p>def _robot_image(self):<br/> # 根據朝向決定圖片名稱<br/> return {<br/> "E": "blue_robot_e.png",<br/> "N": "blue_robot_n.png",<br/> "W": "blue_robot_w.png",<br/> "S": "blue_robot_s.png"<br/> }[self.facing]</p>
+<p>def _draw_robot(self):<br/> # 清除機器人圖層，並在新的位置重繪機器人<br/> self.robot_ctx.clearRect(0, 0, self.world.width * CELL_SIZE, self.world.height * CELL_SIZE)<br/> self.world._draw_image(self.robot_ctx, IMG_PATH + self._robot_image(),<br/> self.x, self.y, CELL_SIZE, CELL_SIZE)</p>
+<p>def _draw_trace(self, from_x, from_y, to_x, to_y):<br/> # 繪製移動軌跡<br/> ctx = self.trace_ctx<br/> ctx.strokeStyle = "#4CAF50" # 綠色軌跡<br/> ctx.lineWidth = 3<br/> <br/> # 將 grid 座標轉換為 Canvas 中心點像素座標<br/> fx = from_x * CELL_SIZE + CELL_SIZE / 2<br/> fy = (self.world.height - 1 - from_y) * CELL_SIZE + CELL_SIZE / 2<br/> tx = to_x * CELL_SIZE + CELL_SIZE / 2<br/> ty = (self.world.height - 1 - to_y) * CELL_SIZE + CELL_SIZE / 2<br/> <br/> ctx.beginPath()<br/> ctx.moveTo(fx, fy)<br/> ctx.lineTo(tx, ty)<br/> ctx.stroke()</p>
+<p>def move(self, steps):<br/> # 將移動動作加入佇列<br/> def action(next_done):<br/> def step():<br/> nonlocal steps<br/> if steps == 0:<br/> next_done()<br/> return</p>
+<p>from_x, from_y = self.x, self.y<br/> dx, dy = 0, 0<br/> if self.facing == "E":<br/> dx = 1<br/> elif self.facing == "W":<br/> dx = -1<br/> elif self.facing == "N":<br/> dy = 1<br/> elif self.facing == "S":<br/> dy = -1<br/> <br/> next_x = self.x + dx<br/> next_y = self.y + dy<br/> <br/> # 邊界檢查：檢查下一步是否在世界範圍內<br/> if 0 &lt;= next_x &lt; self.world.width and 0 &lt;= next_y &lt; self.world.height:<br/> self.x, self.y = next_x, next_y<br/> self._draw_trace(from_x, from_y, self.x, self.y)<br/> self._draw_robot()<br/> steps -= 1<br/> timer.set_timeout(step, ANIMATION_DELAY_MS)<br/> else:<br/> # 如果撞牆，停止移動並完成當前動作<br/> print("🚨 已經撞牆，停止移動！")<br/> next_done()<br/> step()<br/> self.queue.append(action)<br/> self._run_queue()</p>
+<p>def turn_left(self):<br/> # 左轉 (E -&gt; N -&gt; W -&gt; S -&gt; E)<br/> def action(done):<br/> idx = self.facing_order.index(self.facing)<br/> self.facing = self.facing_order[(idx + 1) % 4]<br/> self._draw_robot()<br/> timer.set_timeout(done, ANIMATION_DELAY_MS)<br/> self.queue.append(action)<br/> self._run_queue()</p>
+<p>def turn_right(self):<br/> # 右轉 (E -&gt; S -&gt; W -&gt; N -&gt; E)<br/> def action(done):<br/> idx = self.facing_order.index(self.facing)<br/> # 負數取模運算，確保結果為正<br/> self.facing = self.facing_order[(idx - 1 + 4) % 4] <br/> self._draw_robot()<br/> timer.set_timeout(done, ANIMATION_DELAY_MS)<br/> self.queue.append(action)<br/> self._run_queue()</p>
+<p>def _run_queue(self):<br/> # 處理動作佇列<br/> if self.running or not self.queue:<br/> return<br/> self.running = True<br/> action = self.queue.pop(0)<br/> action(lambda: self._done())</p>
+<p>def _done(self):<br/> # 當前動作完成，繼續執行下一個動作<br/> self.running = False<br/> self._run_queue()</p>
+<p># --- 主程式執行區塊 (垂直巡邏邏輯) ---<br/># 1. 建立 10x10 的世界<br/>w = World(10, 10)<br/># 2. 在 (1, 1) 放置機器人<br/>r = AnimatedRobot(w, 1, 1) # 機器人預設朝東 (E)</p>
+<p># 2.5: 讓機器人一開始朝北 (N)，準備垂直向上移動<br/>r.turn_left() # E -&gt; N</p>
+<p># 3. 實現垂直巡邏 (S 字形) 邏輯<br/>steps_to_move = w.height - 1 # 9 步才能走完 10 格高度</p>
+<p># 迴圈遍歷所有 X 座標的列 (x=0 到 x=9)<br/>for i in range(w.width):<br/> is_moving_north = (i % 2 == 0) # 偶數列 (0, 2, 4...) 向北走 (上)</p>
+<p># 步驟 A: 垂直移動 (9 步)<br/> r.move(steps_to_move)</p>
+<p># 步驟 B: 轉向並水平移動 1 步到下一列 (如果不是最後一列)<br/> if i &lt; w.width - 1:<br/> if is_moving_north:<br/> # 偶數列: 走完 (y=0-&gt;9, x=i)，面向 N (上)。<br/> # 轉向 E (右轉)，移動 1 步 E (右)，轉向 S (右轉)<br/> r.turn_right() # N -&gt; E<br/> r.move(1) # 移到 (x=i+1, y=9)<br/> r.turn_right() # E -&gt; S (準備往下走)<br/> else:<br/> # 奇數列: 走完 (y=9-&gt;0, x=i)，面向 S (下)。<br/> # 轉向 E (左轉)，移動 1 步 E (右)，轉向 N (左轉)<br/> r.turn_left() # S -&gt; E<br/> r.move(1) # 移到 (x=i+1, y=0)<br/> r.turn_left() # E -&gt; N (準備往上走)</p>
+<p># 巡邏完成後，可以讓機器人再轉向 (例如轉向東E)<br/>r.turn_right()<br/>print("🤖 垂直巡邏路徑繪製完成！")</p>
+<h1>(六) 機器人程式:</h1>
+<p><span>請修改 </span><a href="https://mde.tw/cp2025/content/Brython.html?src=https://gist.githubusercontent.com/mdecycu/58fed8bd2f5be98a6456a8dcae512011/raw/4019adba4ee4be19c35982d835bad8e7d83a7b2f/brython_robot4_ex1.py">brython_robot4_ex1.py</a><span><span> </span>程式，讓機器人可以與</span><a href="https://mde.tw/cp2025/reeborg/?lang=en&amp;mode=python&amp;menu=worlds%2Fmenus%2Fselect_collection_en.json&amp;name=Alone&amp;url=worlds%2Ftutorial_en%2Fharvest1.json&amp;editor=python%2Fharvest1_east_west.py">機器人收割程式</a><span>的水平採收方式相同。</span></p>
+<p>@@ -0,0 +1,80 @@<br/>from brython_robot4 import init, load_scene_from_url, get_url_parameter<br/>from browser import aio</p>
+<p># 機器人行為腳本<br/>async def robot_actions(robot):<br/> print("開始執行機器人程式，採水平 (Z字形) 巡邏方式採收胡蘿蔔。")</p>
+<p>async def collect_carrots():<br/> # 在當前格子採收所有胡蘿蔔 (假設 'pale_grass' 表示有胡蘿蔔)<br/> while robot.background_is("pale_grass"):<br/> await robot.pick_carrot()</p>
+<p>async def turn_right():<br/> # 透過三次左轉實現右轉<br/> await robot.turn_left()<br/> await robot.turn_left()<br/> await robot.turn_left()</p>
+<p># ----------------------------------------------------<br/> # 主巡邏迴圈：水平 (Z字形) 採收邏輯<br/> is_moving_east = True # 設定初始方向：第一行向東 (E) 走<br/> <br/> # 迴圈直到無法再向上移動 (即到達世界頂端)<br/> while True:<br/> # A. 採收當前格子 (起始點)<br/> await collect_carrots()<br/> <br/> # B. 沿當前方向移動到底<br/> # 持續向前移動，直到前方遇到障礙 (牆壁或世界邊界)<br/> while robot.front_is_clear():<br/> await robot.move(1)<br/> await collect_carrots()<br/> <br/> # C. 檢查是否完成巡邏 (無法向上移動)<br/> # 轉向北 (N) 準備檢查並移動到下一行<br/> if is_moving_east:<br/> await robot.turn_left() # E -&gt; N<br/> else:<br/> await turn_right() # W -&gt; N<br/> <br/> # 檢查上方是否暢通。如果前方是牆壁，表示到達頂部，巡邏完成。<br/> if not robot.front_is_clear():<br/> break # 巡邏完成<br/> <br/> # D. 向上移動一步<br/> await robot.move(1)<br/> await collect_carrots()</p>
+<p># E. 準備下一個方向 (調整為 W 或 E)<br/> if is_moving_east:<br/> # 剛才向東走 (E)，現在在北邊 (N)，準備往西走 (W)<br/> await robot.turn_left() # N -&gt; W<br/> is_moving_east = False<br/> else:<br/> # 剛才向西走 (W)，現在在北邊 (N)，準備往東走 (E)<br/> await turn_right() # N -&gt; E<br/> is_moving_east = True</p>
+<p># ----------------------------------------------------<br/> <br/> # 所有的動作都結束後<br/> print("所有可達格子都已探索完畢。")<br/> print(f"程式執行完畢。總共採收了 {robot.carrots_collected} 個胡蘿蔔。")</p>
+<p># 程式啟動點<br/>async def main():<br/> world_url = get_url_parameter('world')<br/> if world_url:<br/> scene_data = await load_scene_from_url(world_url)<br/> # 設定機器人容量上限為 50<br/> world, robot = init(scene_data, robot_config={"max_carrots": 50})<br/> else:<br/> # 預設場景也設定容量上限<br/> world, robot = init(robot_config={"max_carrots": 50})</p>
+<p>if robot:<br/> await robot_actions(robot)</p>
+<p># 啟動主程式<br/>aio.run(main())</p>
+<h1>(七) 機器人程式:</h1><h1>(二) 作業:</h1><h2>1.</h2>
+<p></p><h3>3. Brython 能做什麼？</h3>
+<p data-path-to-node="19">Brython 的能力幾乎等同於前端的 JavaScript，但語法是 Python。</p>
+<ol data-path-to-node="20" start="1">
+<li>
+<p data-path-to-node="20,0,0"><b data-index-in-node="0" data-path-to-node="20,0,0">操作網頁元素 (DOM Manipulation)：</b></p>
+<ul data-path-to-node="20,0,1">
+<li>
+<p data-path-to-node="20,0,1,0,0">可以讀取、修改網頁上的文字、顏色、樣式。</p>
+</li>
+<li>
+<p data-path-to-node="20,0,1,1,0">語法範例：<code data-index-in-node="5" data-path-to-node="20,0,1,1,0">document["element_id"].style.color = "red"</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p data-path-to-node="20,1,0"><b data-index-in-node="0" data-path-to-node="20,1,0">處理事件 (Event Handling)：</b></p>
+<ul data-path-to-node="20,1,1">
+<li>
+<p data-path-to-node="20,1,1,0,0">偵測滑鼠點擊、鍵盤輸入、滑鼠移動等。</p>
+</li>
+<li>
+<p data-path-to-node="20,1,1,1,0">語法範例：<code data-index-in-node="5" data-path-to-node="20,1,1,1,0">element.bind("click", function_name)</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p data-path-to-node="20,2,0"><b data-index-in-node="0" data-path-to-node="20,2,0">使用 Python 標準庫：</b></p>
+<ul data-path-to-node="20,2,1">
+<li>
+<p data-path-to-node="20,2,1,0,0">你可以直接 <code data-index-in-node="6" data-path-to-node="20,2,1,0,0">import math</code>, <code data-index-in-node="19" data-path-to-node="20,2,1,0,0">import random</code>, <code data-index-in-node="34" data-path-to-node="20,2,1,0,0">import datetime</code>, <code data-index-in-node="51" data-path-to-node="20,2,1,0,0">import json</code> 等 Python 內建模組。</p>
+</li>
+<li>
+<p data-path-to-node="20,2,1,1,0"><i data-index-in-node="0" data-path-to-node="20,2,1,1,0">注意：涉及作業系統層面（如打開本機檔案 <code data-index-in-node="20" data-path-to-node="20,2,1,1,0">open()</code>）的功能在瀏覽器中受限，無法使用。</i></p>
+</li>
+</ul>
+</li>
+<li>
+<p data-path-to-node="20,3,0"><b data-index-in-node="0" data-path-to-node="20,3,0">發送網路請求 (AJAX/API)：</b></p>
+<ul data-path-to-node="20,3,1">
+<li>
+<p data-path-to-node="20,3,1,0,0">可以向伺服器請求資料（例如抓取天氣資料、股票資訊）。</p>
+</li>
+</ul>
+</li>
+<li>
+<p data-path-to-node="20,4,0"><b data-index-in-node="0" data-path-to-node="20,4,0">繪圖與動畫：</b></p>
+<ul data-path-to-node="20,4,1">
+<li>
+<p data-path-to-node="20,4,1,0,0">可以操作 HTML5 的 <code data-index-in-node="13" data-path-to-node="20,4,1,0,0">&lt;canvas&gt;</code> 標籤來畫圖或製作簡單的遊戲</p>
+</li>
+</ul>
+</li>
+</ol><h3>2. 如何在瀏覽器配置 Brython 環境？</h3>
+<p data-path-to-node="11">配置 Brython 非常簡單，你不需要安裝任何軟體，只需要一個文字編輯器（如 Notepad, VS Code）和一個瀏覽器。</p><h3>1. Brython 是什麼？</h3>
+<p data-path-to-node="5">通常，Python 是運行在伺服器端（後端）的語言，而瀏覽器只看得懂 JavaScript（前端）。 Brython 是一個用 JavaScript 寫成的庫（Library），它的工作原理是：</p>
+<ol data-path-to-node="6" start="1">
+<li>
+<p data-path-to-node="6,0,0">在瀏覽器載入網頁時，讀取你寫的 Python 程式碼。</p>
+</li>
+<li>
+<p data-path-to-node="6,1,0">在背景瞬間將這些 Python 程式碼**編譯（Transpile）**成瀏覽器看得懂的 JavaScript。</p>
+</li>
+<li>
+<p data-path-to-node="6,2,0">執行結果。</p>
+</li>
+</ol>
+<p data-path-to-node="7"><b data-index-in-node="0" data-path-to-node="7">特點：</b></p>
+<ul data-path-to-node="8">
+<li>
+<p data-path-to-node="8,0,0">完全在客戶端（瀏覽器）運行，不需要安裝 Python 解譯器。</p>
+</li>
+<li>
+<p data-path-to-node="8,1,0">支援大部分 Python 3 的語法。</p>
+</li>
+<li>
+<p data-path-to-node="8,2,0">可以直接操作網頁元素（DOM）。</p>
+</li>
+</ul><h3>1. 什麼是 Git？ (核心工具)</h3>
+<ul data-path-to-node="5">
+<li>
+<p data-path-to-node="5,0,0"><b data-index-in-node="0" data-path-to-node="5,0,0">這是什麼？</b> Git 是一個<b data-index-in-node="13" data-path-to-node="5,0,0">分散式版本控制系統 (Version Control System)</b>。</p>
+<blockquote data-path-to-node="5,0,1">
+<p data-path-to-node="5,0,1,0"><b data-index-in-node="0" data-path-to-node="5,0,1,0">簡單比喻：</b> 想像你在玩遊戲時的「存檔 (Save)」功能。Git 讓你可以在寫程式的過程中隨時「存檔」，如果寫壞了，可以隨時「讀檔」回到之前的狀態，而不會遺失檔案。</p>
+</blockquote>
+</li>
+<li>
+<p data-path-to-node="5,1,0"><b data-index-in-node="0" data-path-to-node="5,1,0">為什麼要使用？</b></p>
+<ul data-path-to-node="5,1,1">
+<li>
+<p data-path-to-node="5,1,1,0,0"><b data-index-in-node="0" data-path-to-node="5,1,1,0,0">時光機功能：</b> 寫程式寫錯了導致整個專案壞掉？Git 可以讓你一鍵回到昨天正常的版本。</p>
+</li>
+<li>
+<p data-path-to-node="5,1,1,1,0"><b data-index-in-node="0" data-path-to-node="5,1,1,1,0">多人合作：</b> 多人同時修改同一個檔案時，Git 可以協助合併大家的修改，避免互相覆蓋。</p>
+</li>
+<li>
+<p data-path-to-node="5,1,1,2,0"><b data-index-in-node="0" data-path-to-node="5,1,1,2,0">離線工作：</b> 不像雲端硬碟需要網路，Git 的版本控制在你的電腦（本機）上就能運作。</p>
+</li>
+</ul>
+</li>
+<li>
+<p data-path-to-node="5,2,0"><b data-index-in-node="0" data-path-to-node="5,2,0">如何使用？</b> 通常透過 <b data-index-in-node="11" data-path-to-node="5,2,0">Cmd (命令列)</b> 輸入指令。</p>
+<ul data-path-to-node="5,2,1">
+<li>
+<p data-path-to-node="5,2,1,0,0"><code data-index-in-node="0" data-path-to-node="5,2,1,0,0">git init</code>：在資料夾內開始錄製版本。</p>
+</li>
+<li>
+<p data-path-to-node="5,2,1,1,0"><code data-index-in-node="0" data-path-to-node="5,2,1,1,0">git add</code>：選擇要存檔的檔案。</p>
+</li>
+<li>
+<p data-path-to-node="5,2,1,2,0"><code data-index-in-node="0" data-path-to-node="5,2,1,2,0">git commit</code>：確認存檔。</p>
+<p data-path-to-node="5,2,1,2,0"></p>
+<h3>2. 什麼是 GitHub？ (雲端平台)</h3>
+<ul data-path-to-node="7">
+<li>
+<p data-path-to-node="7,0,0"><b data-index-in-node="0" data-path-to-node="7,0,0">這是什麼？</b> GitHub 是一個<b data-index-in-node="16" data-path-to-node="7,0,0">託管 Git 儲存庫的雲端平台</b>。它是全球最大的程式碼社群。</p>
+<blockquote data-path-to-node="7,0,1">
+<p data-path-to-node="7,0,1,0"><b data-index-in-node="0" data-path-to-node="7,0,1,0">簡單比喻：</b> 如果 Git 是你電腦裡的「單機遊戲存檔」，GitHub 就是「雲端備份」加上「社群網路」。</p>
+</blockquote>
+</li>
+<li>
+<p data-path-to-node="7,1,0"><b data-index-in-node="0" data-path-to-node="7,1,0">為什麼要使用？</b></p>
+<ul data-path-to-node="7,1,1">
+<li>
+<p data-path-to-node="7,1,1,0,0"><b data-index-in-node="0" data-path-to-node="7,1,1,0,0">備份：</b> 如果你的電腦壞了，程式碼還在 GitHub 上。</p>
+</li>
+<li>
+<p data-path-to-node="7,1,1,1,0"><b data-index-in-node="0" data-path-to-node="7,1,1,1,0">開源與分享：</b> 你可以看到全世界高手的程式碼，也可以分享自己的作品。</p>
+</li>
+<li>
+<p data-path-to-node="7,1,1,2,0"><b data-index-in-node="0" data-path-to-node="7,1,1,2,0">求職履歷：</b> 許多科技公司會看你的 GitHub 來評估你的技術能力。</p>
+</li>
+</ul>
+</li>
+<li>
+<p data-path-to-node="7,2,0"><b data-index-in-node="0" data-path-to-node="7,2,0">如何使用？</b></p>
+<ul data-path-to-node="7,2,1">
+<li>
+<p data-path-to-node="7,2,1,0,0">註冊帳號。</p>
+</li>
+<li>
+<p data-path-to-node="7,2,1,1,0"><code data-index-in-node="0" data-path-to-node="7,2,1,1,0">git push</code>：將你電腦上的 Git 紀錄上傳到 GitHub。</p>
+</li>
+<li>
+<p data-path-to-node="7,2,1,2,0"><code data-index-in-node="0" data-path-to-node="7,2,1,2,0">git clone</code>：將 GitHub 上的專案下載到你的電腦。</p>
+<h3>3. 什麼是 Gist？ (便利貼)</h3>
+<ul data-path-to-node="9">
+<li>
+<p data-path-to-node="9,0,0"><b data-index-in-node="0" data-path-to-node="9,0,0">這是什麼？</b> Gist 是 GitHub 提供的一項<b data-index-in-node="25" data-path-to-node="9,0,0">輕量級服務</b>，專門用來分享「單一檔案」或「程式碼片段」。</p>
+<blockquote data-path-to-node="9,0,1">
+<p data-path-to-node="9,0,1,0"><b data-index-in-node="0" data-path-to-node="9,0,1,0">簡單比喻：</b> 如果 GitHub 是一整本「書」，Gist 就是一張「便利貼」或「便條紙」。</p>
+</blockquote>
+</li>
+<li>
+<p data-path-to-node="9,1,0"><b data-index-in-node="0" data-path-to-node="9,1,0">為什麼要使用？</b></p>
+<ul data-path-to-node="9,1,1">
+<li>
+<p data-path-to-node="9,1,1,0,0"><b data-index-in-node="0" data-path-to-node="9,1,1,0,0">快速分享：</b> 當你只想分享一段 20 行的程式碼給朋友，不需要建立一個完整的 Git 專案（Repository），用 Gist 最快。</p>
+</li>
+<li>
+<p data-path-to-node="9,1,1,1,0"><b data-index-in-node="0" data-path-to-node="9,1,1,1,0">寫筆記：</b> 很多工程師用它來記錄常用的指令或筆記。</p>
+</li>
+<li>
+<p data-path-to-node="9,1,1,2,0"><b data-index-in-node="0" data-path-to-node="9,1,1,2,0">嵌入部落格：</b> Gist 的程式碼可以直接嵌入 Medium 或網頁中，排版會很漂亮。</p>
+</li>
+</ul>
+</li>
+<li>
+<p data-path-to-node="9,2,0"><b data-index-in-node="0" data-path-to-node="9,2,0">如何使用？</b></p>
+<ul data-path-to-node="9,2,1">
+<li>
+<p data-path-to-node="9,2,1,0,0">進入 <code data-index-in-node="3" data-path-to-node="9,2,1,0,0">gist.github.com</code>。</p>
+</li>
+<li>
+<p data-path-to-node="9,2,1,1,0">貼上程式碼，按下 "Create secret gist" 或 "Create public gist" 即可生成網址分享。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
